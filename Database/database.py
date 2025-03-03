@@ -19,7 +19,7 @@ def format_description_in_message(text:str):
     string_groups = text.split(SPLIT_HERE)
     name = string_groups[0].strip()
     
-    grade = string_groups[1].strip()
+    grade = string_groups[1].strip().upper()
     if "?" in grade:
         desc += "Possible grade: " + grade + ". "
         grade = grade.replace("?","")
