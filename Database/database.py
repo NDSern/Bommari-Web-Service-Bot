@@ -5,7 +5,6 @@ import sqlite3
 FILE = "modified.json"
 DATABASE = "bommari.db"
 SPLIT_HERE = ";"
-GRADES = {}
 
 def open_file(file:str):
     with open(file, encoding="utf8", mode="r") as json_file:

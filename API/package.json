@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "start": "node dist/index.js",
+    "start": "node app.ts",
     "dev": "nodemon -r tsconfig-paths/register app.ts"
   },
   "keywords": [],
