@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import { Route } from "../types/route";
 import { Container } from "react-bootstrap";
 
-const PHOTO_API = "http://bommari.vraminhos.com:3000/public/";
+const PHOTO_API = "http://bommari.vraminhos.com/public/";
 
 type RouteProps = {
 	routes: Route[]

@@ -3,7 +3,7 @@ import CallRoutes from "./components/CallRoutes";
 import { useEffect, useState } from "react";
 import { Route } from "./types/route";
 
-const API = "http://bommari.vraminhos.com:3000/routes";
+const API = "http://bommari.vraminhos.com/routes";
 
 
 export default function App() {
