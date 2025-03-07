@@ -9,6 +9,7 @@ from database import format_description_in_message
 
 FILE = "../Database/modified.json"
 DATABASE = "../Database/bommari.db"
+PHOTO_PATH = "../Database/public/photos"
 
 def add_to_database(msg):
     db_connect = sqlite3.connect(DATABASE)
@@ -64,7 +65,7 @@ def download_photo(link, name):
     r = requests.get(link)
     r.raise_for_status()
     
-    photo_repo = "../Database/photos"
+    photo_repo = PHOTO_PATH
     os.makedirs(photo_repo, exist_ok=True)
     
     photo = os.path.join(photo_repo, name)
