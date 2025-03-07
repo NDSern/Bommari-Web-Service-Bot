@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import Routes from "model";
 import cors from "cors";
+import path from "node:path";
 
 dotenv.config();
 
@@ -11,8 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(cors())
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Express + TypeScript Server");
-    Routes.findAll().then((res) => { console.log(res) })
+    res.sendFile(path.resolve("../Database/public/dist/index.html"))
 });
 
 app.listen(port, () => {

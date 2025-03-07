@@ -6,22 +6,25 @@ type MenuProps = {
 	routes: Route[]
 	setGrade: Dispatch<SetStateAction<string>>
 	setAngle: Dispatch<SetStateAction<string>>
+	setAuthor: Dispatch<SetStateAction<string>>
 }
 
-export default function Menu({ routes, setGrade: setGrade, setAngle: setAngle }: MenuProps) {
+export default function Menu({ routes, setGrade: setGrade, setAngle: setAngle, setAuthor: setAuthor }: MenuProps) {
 	const [open, setOpen] = useState(false)
 
 	let grades = new Set(routes.map((value) => value.grade))
 	let newGrades = Array.from(grades).sort()
-	let angle = new Set(routes.map((value) => value.angle))
-	let newAngle = [...angle].sort()
+	let angles = new Set(routes.map((value) => value.angle))
+	let newAngle = [...angles].sort()
+	let authors = new Set(routes.map((value) => value.user))
+	let newAuthor = [...authors].sort()
 
 	return (
 		<div className="sticky-top">
 			<Container className="bg-warning pt-2 pb-3" fluid>
 				<div className="d-flex justify-content-between">
-					<Image src="./src/assets/cropped-cropped-tekiila_outline-1.png" width={"60rem"} height={"60rem"} />
-					<Image src="./src/assets/filter-solid.svg" width={"60rem"} height={"60rem"} onClick={() => setOpen(!open)} />
+					<Image src="/public/cropped-cropped-tekiila_outline-1.png" width={"60rem"} height={"60rem"} />
+					<Image src="/public/filter-solid.svg" width={"60rem"} height={"60rem"} onClick={() => setOpen(!open)} />
 				</div>
 				<Collapse in={open}>
 					<div>
@@ -31,14 +34,21 @@ export default function Menu({ routes, setGrade: setGrade, setAngle: setAngle }:
 							<option value="">Mysterious grade</option>
 							{newGrades.map((grade) => {
 								if (grade == "") return;
-								return <option value={grade}>{grade}</option>
+								return <option key={grade} value={grade}>{grade}</option>
 							})}
 						</Form.Select>
 						<div className="mt-3 mb-1">Angle</div>
 						<Form.Select onChange={(e) => setAngle(e.target.value)}>
 							<option value="all">Every angle</option>
 							{newAngle.map((angle) => (
-								<option value={angle}>{angle}</option>
+								<option key={angle} value={angle}>{angle}</option>
+							))}
+						</Form.Select>
+						<div className="mt-3 mb-1">Author</div>
+						<Form.Select onChange={(e) => setAuthor(e.target.value)}>
+							<option value="all">Every author</option>
+							{newAuthor.map((author) => (
+								<option key={author} value={author}>{author}</option>
 							))}
 						</Form.Select>
 					</div>
