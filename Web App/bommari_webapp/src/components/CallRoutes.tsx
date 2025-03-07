@@ -27,7 +27,7 @@ export default function CallRoutes({routes, filteredRoutes, setGrade, setAngle, 
 		<Container className={"py-3"}>
 			<p className={"alert alert-primary"}>
 				<div className={"d-flex justify-content-between align-items-center"}>
-				<span>Number of routes: {routes.length}</span>
+				<span>Number of routes: {filteredRoutes.length}</span>
 				<span className={"btn"} onClick={() => setOpen(!open)}>
 					<FilterOutline
 						title={"Filter"}
