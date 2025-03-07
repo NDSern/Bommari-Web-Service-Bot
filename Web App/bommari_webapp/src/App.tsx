@@ -2,6 +2,7 @@ import Menu from "./components/Menu";
 import CallRoutes from "./components/CallRoutes";
 import { useEffect, useState } from "react";
 import { Route } from "./types/route";
+import ToTopButton from "./components/ToTopButton.tsx";
 
 const API = "http://bommari.vraminhos.com/routes";
 
@@ -29,9 +30,10 @@ export default function App() {
 	}, [grade, angle, routes, author])
 
 	return (
-		<>
-			<Menu routes={routes} setGrade={setGrade} setAngle={setAngle} setAuthor={setAuthor} />
-			<CallRoutes routes={filteredRoutes} />
-		</>
+		<div className={"bg-light"}>
+			<Menu/>
+			<CallRoutes filteredRoutes={filteredRoutes} routes={routes} setGrade={setGrade} setAngle={setAngle} setAuthor={setAuthor} />
+			<ToTopButton/>
+		</div>
 	);
 }
