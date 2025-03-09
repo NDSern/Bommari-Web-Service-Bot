@@ -3958,45 +3958,6 @@
         ]
     },
     {
-        "id": 36,
-        "type": "Bot message",
-        "date": "2025-03-06T22:51:40",
-        "date_unixtime": "1741294300",
-        "from": "Son Nguyen",
-        "from_id": 1810298681,
-        "photo": "photos/photo_36@06-03-2025_22-51-40.jpg",
-        "photo_file_size": 3942,
-        "width": 105,
-        "height": 105,
-        "text": "this is a route; 7A+; 70deg"
-    },
-    {
-        "id": 37,
-        "type": "Bot message",
-        "date": "2025-03-06T22:54:58",
-        "date_unixtime": "1741294498",
-        "from": "Son Nguyen",
-        "from_id": 1810298681,
-        "photo": "photos/photo_37@06-03-2025_22-54-58.jpg",
-        "photo_file_size": 12508,
-        "width": 607,
-        "height": 130,
-        "text": "confused; 6A; 23d"
-    },
-    {
-        "id": 38,
-        "type": "Bot message",
-        "date": "2025-03-06T22:55:43",
-        "date_unixtime": "1741294543",
-        "from": "Son Nguyen",
-        "from_id": 1810298681,
-        "photo": "photos/photo_38@06-03-2025_22-55-43.jpg",
-        "photo_file_size": 12508,
-        "width": 607,
-        "height": 130,
-        "text": "confused; 5a; 1d"
-    },
-    {
         "id": 851,
         "type": "message",
         "date": "2025-03-03T14:10:14",
@@ -4106,7 +4067,7 @@
         "photo_file_size": 239430,
         "width": 720,
         "height": 1280,
-        "text": "1 tuhannesta 6b+; 30 deg; all footholds on box ok",
+        "text": "1 tuhannesta; 6b+; 30 deg; all footholds on box ok",
         "text_entities": [
             {
                 "type": "plain",
