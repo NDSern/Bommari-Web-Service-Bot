@@ -7,5 +7,9 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     allowedHosts: ["bommari.vraminhos.com"]
+  },
+  build:{
+    outDir: "../../Database/dist",
+    emptyOutDir: true,
   }
 })

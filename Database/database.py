@@ -18,16 +18,29 @@ def format_description_in_message(text:str):
     string_groups = text.split(SPLIT_HERE)
     name = string_groups[0].strip()
     
+    # Check for errors in message format by user in Telegram chat, 
+    # still input the data intp the database regardless, 
+    # waiting for the data to be fixed
+    
+    # Angle
+    if len(string_groups) < 2:
+        print("<2 format", string_groups)
+        return [name, "error", "error", desc]
     grade = string_groups[1].strip().upper()
     if "?" in grade:
         desc += "Possible grade: " + grade + ". "
         grade = grade.replace("?","")
     
+    # Degree
+    if len(string_groups) < 3:
+        print("<3 format", string_groups)
+        return [name, grade, "error", desc]
     angle = string_groups[2].strip()
     angle_numbers = re.findall(r'\d+', angle)
     if len(angle_numbers) > 0:
         angle = angle_numbers[0]
     
+    # Description
     if len(string_groups) > 3:
         desc += string_groups[3].strip()
         

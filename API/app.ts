@@ -3,20 +3,28 @@ import dotenv from "dotenv";
 import Routes from "model";
 import cors from "cors";
 import path from "node:path";
+import https from "https";
+import fs from "fs";
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 80;
+const port = 443;
 
-app.use(cors())
+
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-    res.sendFile(path.resolve("../Database/public/dist/index.html"))
+    res.sendFile(path.resolve("../Database/dist/index.html"));
 });
 
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+const server = https.createServer({
+    cert: fs.readFileSync(path.join(__dirname, "SSL", "fullchain.pem")),
+    key: fs.readFileSync(path.join(__dirname, "SSL", "privkey.pem"))
+}, app);
+
+server.listen(port, () => {
+    console.log(`[server]: Server is running at https://localhost:${port}`);
 });
 
 app.get("/routes", (req: Request, res: Response) => {
@@ -25,9 +33,11 @@ app.get("/routes", (req: Request, res: Response) => {
         order: [
             ["id", "desc"]
         ]
-    }).then(routes => { 
-        res.json(routes)
+    }).then(routes => {
+        res.json(routes);
     })
-})
+});
 
-app.use('/public', express.static('../Database/public'))
+app.use('/public', express.static('../Database/public'));
+
+app.use('/', express.static('../Database/dist'));

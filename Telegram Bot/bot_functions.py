@@ -18,7 +18,14 @@ def add_to_database(msg):
     query = """
     INSERT INTO routes(date, user, photo, name, desc, grade, angle) VALUES (?, ?, ?, ?, ?, ?, ?)
     """
-    name, grade, angle, desc = format_description_in_message(msg["text"])
+    try:
+        name, grade, angle, desc = format_description_in_message(msg["text"])
+    except Exception as e:
+        print(e, file=sys.stderr)
+        name = msg["text"]
+        grade = "error"
+        angle = "error"
+        desc = ""
     cursor.execute(query, (msg["date"], msg["from"], msg["photo"], name, desc, grade, angle))
     cursor.close()
     db_connect.commit()
@@ -41,13 +48,13 @@ def input_data_to_database(message):
     print(photo_name)
     
     formatted_date_for_database = datetime.fromtimestamp(message.date).strftime('%Y-%m-%dT%H:%M:%S')
-    
+
     message_dict = {}
     message_dict["id"] = message.id
     message_dict["type"] = "Bot message"
     message_dict["date"] = formatted_date_for_database
     message_dict["date_unixtime"] = str(message.date)
-    message_dict["from"] = message.from_user.first_name + " " + message.from_user.last_name
+    message_dict["from"] = message.from_user.first_name + (" " + message.from_user.last_name if message.from_user.last_name else "")
     message_dict["from_id"] = message.from_user.id
     message_dict["photo"] = "photos/" + photo_name
     message_dict["photo_file_size"] = message.json["photo"][-1]["file_size"]

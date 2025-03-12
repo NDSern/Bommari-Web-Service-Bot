@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Route } from "./types/route";
 import ToTopButton from "./components/ToTopButton.tsx";
 
-const API = "http://bommari.vraminhos.com/routes";
+const API = "https://bommari.vraminhos.com/routes";
 
 
 export default function App() {
@@ -31,9 +31,9 @@ export default function App() {
 
 	return (
 		<div className={"bg-light"}>
-			<Menu/>
-			<CallRoutes filteredRoutes={filteredRoutes} routes={routes} setGrade={setGrade} setAngle={setAngle} setAuthor={setAuthor} />
-			<ToTopButton/>
+			<Menu />
+			<CallRoutes filteredRoutes={filteredRoutes} routes={routes} setGrade={setGrade} setAngle={setAngle} setAuthor={setAuthor} grade={grade} angle={angle} author={author} />
+			<ToTopButton />
 		</div>
 	);
 }
