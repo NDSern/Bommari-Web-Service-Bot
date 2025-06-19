@@ -75,15 +75,15 @@ def add_to_database(msg):
     cursor = db_connect.cursor()
     
     query = """
-    INSERT INTO routes(date, user, photo, name, desc, grade, angle) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO routes(id, date, user, photo, name, desc, grade, angle) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """
     try:
         name, grade, angle, desc = format_description_in_message(msg["text"])
     except Exception as e:
         print(e, file=sys.stderr)
         
-    cursor.execute(query, (msg["date"], msg["from"], msg["photo"], name, desc, grade, angle))
+    cursor.execute(query, (msg["id"], msg["date"], msg["from"], msg["photo"], name, desc, grade, angle))
     cursor.close()
     db_connect.commit()
     db_connect.close()
@@ -145,7 +145,7 @@ def change_route(msg:str):
         print("Wrong format for the comment")
         return False
     
-    initial_route_name = msgs[0][9:].strip()
+    initial_route_name = msgs[0][12:].strip()
     fixed_route_name = msgs[1].strip()
     print(initial_route_name)
     print(fixed_route_name)
@@ -183,9 +183,38 @@ def delete_route(msg:str):
     WHERE name = ?
     """
     
-    cursor.execute(query, name)
+    cursor.execute(query, (name,))
     verify_change_in_table = cursor.rowcount != 0
         
+    cursor.close()
+    db_connect.commit()
+    db_connect.close()
+    
+    return verify_change_in_table
+
+def update_route(msg):
+    verify_change_in_table = False
+    
+    db_connect = sqlite3.connect(DATABASE)
+    cursor = db_connect.cursor()
+    
+    query = """
+    SELECT id FROM routes WHERE id = ?
+    """
+    
+    cursor.execute(query, (msg.id,))
+    data = cursor.fetchone()
+    if not data:
+        return False
+    
+    query = """
+    DELETE FROM routes 
+    WHERE id = ? 
+    """
+    
+    cursor.execute(query, (msg.id,))
+    verify_change_in_table = cursor.rowcount != 0
+    
     cursor.close()
     db_connect.commit()
     db_connect.close()

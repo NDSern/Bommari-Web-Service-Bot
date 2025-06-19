@@ -10,6 +10,7 @@ from bot_functions import download_photo
 from bot_functions import check_for_valid_format
 from bot_functions import change_route
 from bot_functions import delete_route
+from bot_functions import update_route
 
 load_dotenv()
 BOT_KEY = 'BOT_KEY'
@@ -47,19 +48,19 @@ async def get_photo(message):
 
 @bot.edited_message_handler(content_types=['photo'])
 async def get_edited_photo(message):
-    await get_photo(message=message)
+    update_route(message)        
+    await get_photo(message)
     
 @bot.message_handler(commands=['addroute'])
 async def command_asd(message):
-    if not await get_photo(message=message):
+    if not await get_photo(message.caption[9:].strip()):
         await bot.reply_to(message, "Wrong format!")
         return False
     
     print("Admin command add route successfully!")
     await bot.reply_to(message, "Route added successfully!")
     
-#@bot.message_handler(commands=["changeroute"])
-@bot.message_handler(commands=["fixroute"])
+@bot.message_handler(commands=["changeroute"])
 async def command_change_route(message):
     wrong_format_message = "Format is \"/changeroute <initial route name> | <fixed route name>\""
     if not message.text:
@@ -86,4 +87,3 @@ async def command_delete_route(message):
         
         
 asyncio.run(bot.infinity_polling())
-#142
