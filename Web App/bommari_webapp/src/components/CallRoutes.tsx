@@ -1,7 +1,8 @@
 import Card from "react-bootstrap/Card";
 import { Route } from "../types/route";
 import { Collapse, Container, Form } from "react-bootstrap";
-import { CloseOutline, FilterOutline } from "react-ionicons";
+import { IoMdClose } from "react-icons/io";
+import { IoFilterOutline } from "react-icons/io5";
 import { Dispatch, SetStateAction, useState } from "react";
 
 const PHOTO_API = "https://bommari.vraminhos.com/public/";
@@ -35,10 +36,9 @@ export default function CallRoutes({ routes, filteredRoutes, setGrade, setAngle,
 					<span>Number of routes: {filteredRoutes.length}</span>
 					<div>
 						<span className={"btn"} onClick={() => setOpen(!open)}>
-							<FilterOutline
+							<IoFilterOutline
 								title={"Filter"}
-								height="25px"
-								width="25px"
+								size={25}
 							/>
 						</span>
 						<span className={"btn"} onClick={() => {
@@ -46,10 +46,9 @@ export default function CallRoutes({ routes, filteredRoutes, setGrade, setAngle,
 							setAngle("all");
 							setAuthor("all");
 						}}>
-							<CloseOutline
+							<IoMdClose
 								title={"Clear filter"}
-								height="25px"
-								width="25px"
+								size={25}
 							/>
 						</span>
 					</div>
